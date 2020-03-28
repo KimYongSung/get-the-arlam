@@ -1,6 +1,7 @@
 package com.arlam.api.group.domain;
 
 import com.arlam.api.member.domain.Member;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,7 +25,7 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "REG_SEQ", nullable = false)
-    private Long regSeq;
+    private Long id;
 
     @Column(name = "GRP_ID", nullable = false)
     private String groupId;
@@ -38,4 +39,12 @@ public class Group {
 
     @Column(name = "GRP_CR_DT")
     private LocalDateTime grpCreateDt;
+
+    @Builder
+    public Group(String groupId, String groupNm, Member member, LocalDateTime grpCreateDt) {
+        this.groupId = groupId;
+        this.groupNm = groupNm;
+        this.member = member;
+        this.grpCreateDt = grpCreateDt;
+    }
 }

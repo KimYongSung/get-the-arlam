@@ -1,4 +1,4 @@
-package com.arlam.api.config;
+package com.arlam.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

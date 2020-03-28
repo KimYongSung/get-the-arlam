@@ -1,4 +1,4 @@
-package com.arlam.api.config;
+package com.arlam.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;

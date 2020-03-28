@@ -86,3 +86,7 @@ local.properties
 .idea
 .gradle
 
+## project
+src/main/generated
+src/main/resources/application-db.properties
+

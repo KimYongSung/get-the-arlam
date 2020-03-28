@@ -22,15 +22,15 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "JOIN_SEQ")
-    private Long joinSeq;
+    private Long id;
 
-    @Column(name = "MEM_NO")
+    @Column(name = "MEM_NO", nullable = false)
     private Long memNo;
 
-    @Column(name = "MEM_ID")
+    @Column(name = "MEM_ID", nullable = false)
     private String memId;
 
-    @Column(name = "MEM_PWD")
+    @Column(name = "MEM_PWD", nullable = false)
     private String memPwd;
 
     @Column(name = "MEM_REG_DT")

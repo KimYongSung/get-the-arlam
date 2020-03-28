@@ -6,6 +6,7 @@ import com.arlam.api.alarm.constants.converters.AlarmDayConverter;
 import com.arlam.api.alarm.constants.converters.AlarmStatusConverter;
 import com.arlam.api.group.domain.Group;
 import com.arlam.api.member.domain.Member;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,7 +32,7 @@ public class Alarm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ALM_SEQ", nullable = false)
-    private Long alarmSeq;
+    private Long id;
 
     @Column(name = "ALM_ID" , nullable = false)
     private String alarmId;
@@ -63,4 +64,18 @@ public class Alarm {
     @Convert(converter = AlarmDayConverter.class)
     @Column(name = "DAY", nullable = false)
     private AlarmDay day;
+
+    @Builder
+    public Alarm(String alarmId, Member member, LocalDateTime regDt, LocalDateTime sendDt
+            , AlarmStatus status, String title, String text, Group group, AlarmDay day) {
+        this.alarmId = alarmId;
+        this.member = member;
+        this.regDt = regDt;
+        this.sendDt = sendDt;
+        this.status = status;
+        this.title = title;
+        this.text = text;
+        this.group = group;
+        this.day = day;
+    }
 }
