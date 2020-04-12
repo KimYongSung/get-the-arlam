@@ -20,22 +20,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
-@Table(name = "ALARM", uniqueConstraints = @UniqueConstraint(name = "PK_ALARM_01", columnNames = {"GRP_ID", "MEM_ID"}))
+@Table(name = "ALARM")
 @Entity
 public class Alarm {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ALM_SEQ", nullable = false)
+    @Column(name = "ALM_ID", unique = true)
     private Long id;
-
-    @Column(name = "ALM_ID" , nullable = false)
-    private String alarmId;
 
     @ManyToOne
     @JoinColumn(name = "MEM_NO", nullable = false)
@@ -58,7 +54,7 @@ public class Alarm {
     private String text;
 
     @OneToOne
-    @JoinColumn(name = "GRP_ID", nullable = false)
+    @JoinColumn(name = "GRP_ID" , nullable = false)
     private Group group;
 
     @Convert(converter = AlarmDayConverter.class)
@@ -66,9 +62,8 @@ public class Alarm {
     private AlarmDay day;
 
     @Builder
-    public Alarm(String alarmId, Member member, LocalDateTime regDt, LocalDateTime sendDt
+    public Alarm(Member member, LocalDateTime regDt, LocalDateTime sendDt
             , AlarmStatus status, String title, String text, Group group, AlarmDay day) {
-        this.alarmId = alarmId;
         this.member = member;
         this.regDt = regDt;
         this.sendDt = sendDt;

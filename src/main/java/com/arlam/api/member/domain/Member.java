@@ -15,17 +15,14 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-@Table(name = "MEMBER", uniqueConstraints = @UniqueConstraint(name = "PK_USER_01", columnNames = {"MEM_NO", "MEM_ID"}))
+@Table(name = "MEMBER")
 @Entity
 public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "JOIN_SEQ")
-    private Long id;
-
-    @Column(name = "MEM_NO", nullable = false)
-    private Long memNo;
+    @Column(name = "MEM_NO", unique = true)
+    private Long memNO;
 
     @Column(name = "MEM_ID", nullable = false)
     private String memId;
@@ -52,9 +49,8 @@ public class Member {
     private LocalDateTime memLockDt;
 
     @Builder
-    public Member(Long memNo, String memId, String memPwd, LocalDateTime memRegDt, String loginKey, String androidKey
+    public Member(String memId, String memPwd, LocalDateTime memRegDt, String loginKey, String androidKey
             , String memLevel, Long memPoint, LocalDateTime memLockDt) {
-        this.memNo = memNo;
         this.memId = memId;
         this.memPwd = memPwd;
         this.memRegDt = memRegDt;

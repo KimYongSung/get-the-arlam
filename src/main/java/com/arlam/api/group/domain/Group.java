@@ -13,36 +13,31 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
-@Table(name = "GROUP", uniqueConstraints = @UniqueConstraint(name = "PK_GROUP_01", columnNames = {"GRP_ID", "MEM_ID"}))
+@Table(name = "GROUP")
 @Entity
 public class Group {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "REG_SEQ", nullable = false)
-    private Long id;
-
-    @Column(name = "GRP_ID", nullable = false)
-    private String groupId;
+    @Column(name = "GRP_ID", unique = true)
+    private Long groupId;
 
     @Column(name = "GRP_NM", nullable = false)
     private String groupNm;
 
     @ManyToOne
-    @JoinColumn(name = "MEM_ID", nullable = false)
+    @JoinColumn(name = "MEM_NO", nullable = false)
     private Member member;
 
     @Column(name = "GRP_CR_DT")
     private LocalDateTime grpCreateDt;
 
     @Builder
-    public Group(String groupId, String groupNm, Member member, LocalDateTime grpCreateDt) {
-        this.groupId = groupId;
+    public Group(String groupNm, Member member, LocalDateTime grpCreateDt) {
         this.groupNm = groupNm;
         this.member = member;
         this.grpCreateDt = grpCreateDt;
