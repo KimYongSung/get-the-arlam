@@ -22,7 +22,7 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEM_NO", unique = true)
-    private Long memNO;
+    private Long memNo;
 
     @Column(name = "MEM_ID", nullable = false)
     private String memId;

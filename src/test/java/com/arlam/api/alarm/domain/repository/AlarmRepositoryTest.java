@@ -41,7 +41,7 @@ public class AlarmRepositoryTest {
         repository.save(alarm);
 
         // when
-        Optional<Alarm> optionalAlarm = repository.findById(alarm.getId());
+        Optional<Alarm> optionalAlarm = repository.findById(alarm.getAlarmId());
 
         // then
         assertThat(optionalAlarm.isPresent()).isTrue();
@@ -65,6 +65,7 @@ public class AlarmRepositoryTest {
     private Group givenTestGroup(Member member) {
         Group group = Group.builder()
                 .grpCreateDt(LocalDateTime.now())
+                .groupNm("테스트 그룹")
                 .member(member)
                 .build();
 
