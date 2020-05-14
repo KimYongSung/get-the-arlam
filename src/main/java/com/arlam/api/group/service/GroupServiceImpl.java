@@ -1,6 +1,7 @@
 package com.arlam.api.group.service;
 
 import com.arlam.api.group.domain.Group;
+import com.arlam.api.group.domain.repository.GroupMemberRepositorySupport;
 import com.arlam.api.group.domain.repository.GroupRepository;
 import com.arlam.api.group.domain.repository.GroupRepositorySupport;
 import com.arlam.api.group.dto.GroupDTO;
@@ -33,9 +34,7 @@ public class GroupServiceImpl implements GroupService{
             return Response.emptyPage(pageable);
         }
 
-        Page<GroupDTO> dtos = groups.map((entity) -> {
-            return mapper.toDto(entity);
-        });
+        Page<GroupDTO> dtos = groups.map(mapper::toDto);
 
         return Response.success(dtos, pageable);
     }
@@ -43,35 +42,9 @@ public class GroupServiceImpl implements GroupService{
     @Override
     public Response searchGroupName(String keyword, Pageable pageable) {
 
-        QueryResults<Group> results = repositorySupport.findByGrpNmLike(keyword, pageable);
+        QueryResults<Group> results = repositorySupport.findByGrpNm(keyword, pageable);
 
         return Response.success(results, pageable);
     }
 
-    @Override
-    public Response isJoin(Long memberNo, GroupDTO dto) {
-
-        Optional<Group> optional = repositorySupport.findByIdAndMemberNo(dto.getGroupId(), memberNo);
-
-        return Response.success(optional.isPresent());
-    }
-
-    @Override
-    public Response joinGroup(Long memberNo, GroupDTO dto) {
-
-        Optional<Group> optional = repositorySupport.findByIdAndMemberNo(dto.getGroupId(), memberNo);
-
-        if(optional.isPresent()){
-            // 예외처리
-        }
-
-
-
-        return null;
-    }
-
-    @Override
-    public Response outGroup(Long memberNo, GroupDTO dto) {
-        return null;
-    }
 }

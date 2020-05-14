@@ -28,14 +28,14 @@ public class GroupRepositorySupport extends QuerydslRepositorySupport {
 
     /**
      * 그룹 이름으로 like 조회
-     * @param keyword
+     * @param grpNm
      * @param pageable
      * @return
      */
-    public QueryResults<Group> findByGrpNmLike(String keyword, Pageable pageable){
+    public QueryResults<Group> findByGrpNm(String grpNm, Pageable pageable){
 
         JPAQuery<Group> query = queryFactory.selectFrom(group)
-                                            .where(group.groupNm.contains(keyword))
+                                            .where(group.groupNm.contains(grpNm))
                                             ;
 
         return getQuerydsl().applyPagination(pageable, query).fetchResults();
@@ -45,8 +45,7 @@ public class GroupRepositorySupport extends QuerydslRepositorySupport {
 
         Group group = queryFactory.selectFrom(QGroup.group)
                 .where(QGroup.group.groupId.eq(groupId)
-                .and(QGroup.group.member.memNo.eq(memberNo))
-                )
+                .and(QGroup.group.member.memNo.eq(memberNo)))
                 .fetchOne();
 
         return Optional.of(group);

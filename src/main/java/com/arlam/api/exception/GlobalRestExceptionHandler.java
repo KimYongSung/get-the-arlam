@@ -1,5 +1,6 @@
 package com.arlam.api.exception;
 
+import com.arlam.app.exception.ApiException;
 import com.arlam.app.result.Response;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class GlobalRestExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(value = ApiException.class)
+    public ResponseEntity<Object> handler(ApiException e, WebRequest request){
+        return handleExceptionInternal(e, e.toResponse(), null, HttpStatus.INTERNAL_SERVER_ERROR, request);
+    }
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<Object> handler(Exception e, WebRequest request){

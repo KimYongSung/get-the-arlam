@@ -21,6 +21,7 @@ public enum ErrorCode {
     , CD_2000("2000","API 요청을 실패하였습니다.")
     , CD_2001("2001","API 요청 결과가 없습니다.")
     , CD_2002("2002","API 요청 실패하였습니다.")
+    , CD_3001("3001","이미 참여한 그룹방 입니다.")
     ;
 
     private final String code;
