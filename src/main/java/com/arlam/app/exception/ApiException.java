@@ -3,7 +3,7 @@ package com.arlam.app.exception;
 import com.arlam.app.constants.ErrorCode;
 import com.arlam.app.result.Response;
 
-public class ApiException extends RuntimeException{
+public abstract class ApiException extends RuntimeException{
 
     private final ErrorCode errorCode;
 

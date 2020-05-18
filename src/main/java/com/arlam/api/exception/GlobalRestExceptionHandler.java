@@ -1,6 +1,8 @@
 package com.arlam.api.exception;
 
 import com.arlam.app.exception.ApiException;
+import com.arlam.app.exception.BadRequestException;
+import com.arlam.app.exception.NotFoundException;
 import com.arlam.app.result.Response;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,16 @@ public class GlobalRestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = ApiException.class)
     public ResponseEntity<Object> handler(ApiException e, WebRequest request){
         return handleExceptionInternal(e, e.toResponse(), null, HttpStatus.INTERNAL_SERVER_ERROR, request);
+    }
+
+    @ExceptionHandler(value = BadRequestException.class)
+    public ResponseEntity<Object> handler(BadRequestException e, WebRequest request){
+        return handleExceptionInternal(e, e.toResponse(), null, HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value = NotFoundException.class)
+    public ResponseEntity<Object> handler(NotFoundException e, WebRequest request){
+        return handleExceptionInternal(e, e.toResponse(), null, HttpStatus.NOT_FOUND, request);
     }
 
     @ExceptionHandler(value = Exception.class)
